@@ -72,6 +72,11 @@ jobs:
           name: Coverage Document
           path: Coverage
         
+      - name: Files Generated
+        run: |
+          pwd
+          ls -lrth
+        
 
 
 
