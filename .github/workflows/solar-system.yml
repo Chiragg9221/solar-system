@@ -31,15 +31,19 @@ jobs:
             npm install
 
       - name: Unit testing
+        id: unit_test_id
         run: |
             npm test 
             pwd 
             ls -lrth
+
+
       - name: Upload Artifact
+        if: failure() && steps.unit_test_id.outcome == 'failure' || steps.unit_test_id.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
             name: Unit_Test_Logs
-            path: 
+            path: test-results.xml
         
 
 
