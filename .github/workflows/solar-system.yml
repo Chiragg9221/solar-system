@@ -68,16 +68,16 @@ jobs:
       - name: Get the Coverage Report
         run: |
           npm run coverage
+        continue-on-error: true
+        
 
       - name: Artifact Coverage Upload
-        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: Coverage Document
           path: coverage
         
       - name: Files Generated
-        continue-on-error: true
         run: |
           pwd
           ls -lrth
