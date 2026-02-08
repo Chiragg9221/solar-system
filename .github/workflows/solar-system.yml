@@ -70,14 +70,14 @@ jobs:
           npm run coverage
 
       - name: Artifact Coverage Upload
-        if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: Coverage Document
           path: coverage
         
       - name: Files Generated
-        if: always()
+        continue-on-error: true
         run: |
           pwd
           ls -lrth
