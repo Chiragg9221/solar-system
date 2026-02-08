@@ -13,6 +13,10 @@ env:
   MONGO_USERNAME: ${{vars.MONGO_USERNAME}}
   MONGO_PASSWORD: ${{vars.MONGO_PASSWORD}}
 
+concurrency: 
+  group: Workflow
+  cancel-in-progress: true
+
 jobs:
   Unit_Testing:
     runs-on: ubuntu-latest
