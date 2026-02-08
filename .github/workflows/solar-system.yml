@@ -66,6 +66,7 @@ jobs:
           npm run coverage
 
       - name: Artifact Coverage Upload
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Coverage Document
