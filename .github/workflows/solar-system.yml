@@ -9,9 +9,9 @@ on:
   workflow_dispatch:
 
 env:
-    MONGO_URI: "mongodb+srv://supercluster.d83jj.mongodb.net/superData"
-    MONGO_USERNAME: ${{vars.MONGO_USERNAME}}
-    MONGO_PASSWORD: ${{vars.MONGO_PASSWORD}}
+  MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+  MONGO_USERNAME: ${{vars.MONGO_USERNAME}}
+  MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
 
 jobs:
   Unit_Testing:
@@ -32,13 +32,14 @@ jobs:
 
       - name: Unit testing
         run: |
-            npm test >> npm_test.txt
-
+            npm test 
+            pwd 
+            ls -lrth
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
             name: Unit_Test_Logs
-            path: npm_test.txt
+            path: 
         
 
 
