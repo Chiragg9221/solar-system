@@ -8,6 +8,11 @@ on:
 
   workflow_dispatch:
 
+env:
+    MONGO_URI: "mongodb+srv://supercluster.d83jj.mongodb.net/superData"
+    MONGO_USERNAME: ${{vars.MONG0_USERNAME}}
+    MONGO_PASSWORD: ${{vars.MONGO_PASSWORD}}
+
 jobs:
   Unit_Testing:
     runs-on: ubuntu-latest
