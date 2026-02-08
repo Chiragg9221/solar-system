@@ -44,6 +44,32 @@ jobs:
         with:
             name: Unit_Test_Logs
             path: test-results.xml
+
+
+    
+  Unit_Coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Npm Download
+        uses: actions/setup-node@v4
+
+      - name: Install Node
+        run: | 
+          npm install
+
+      - name: Get the Coverage Report
+        run: |
+          npm run coverage
+
+      - name: Artifact Coverage Upload
+        uses: actions/upload-artifacts@v4
+        with:
+          name: Coverage Document
+          path: Coverage
         
 
 
