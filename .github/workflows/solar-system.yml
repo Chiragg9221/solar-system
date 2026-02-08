@@ -73,6 +73,7 @@ jobs:
           path: Coverage
         
       - name: Files Generated
+        continue-on-error: true
         run: |
           pwd
           ls -lrth
