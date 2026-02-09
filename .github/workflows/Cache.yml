@@ -31,7 +31,7 @@ jobs:
                 npm install
 
             - name: Upload Artifacts
-              uses: actions/upload-artifacts@v4
+              uses: actions/upload-artifact@v4
               with:
                 name: node_modules
                 path: node_modules
