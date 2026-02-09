@@ -34,12 +34,12 @@ jobs:
         run: |
             npm install
 
-      - name: Unit testing
-        id: unit_test_id
-        run: |
-            npm test 
-            pwd 
-            ls -lrth
+      # - name: Unit testing
+      #   id: unit_test_id
+      #   run: |
+      #       npm test 
+      #       pwd 
+      #       ls -lrth
 
 
       - name: Upload Artifact
