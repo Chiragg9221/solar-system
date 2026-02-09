@@ -82,6 +82,16 @@ jobs:
           pwd
           ls -lrth
 
+  Docker_login:
+    needs: [Unit_Coverage,Unit_Testing]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
     
 
       
