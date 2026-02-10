@@ -92,9 +92,34 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    
+  Docker_Build:
+    needs: [Docker_login]
+    runs-on: ubuntu-latest
 
-      
+    steps:
+      - name: Building Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          push: False     
+          context: .     # this specifices the docker file needs to be used in order to create the image
+          tag: ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}           #can be considered as image-name
+
+  Docker_Image_Testing:
+      needs: [Docker_Build]
+      runs-on: Ubuntu-latest
+      steps:
+        - name: Image testing
+          run: |
+            docker images
+            docker run --name solar-system-app -d \
+            -p 3000:3000 
+            -e MONGO_URI:$MONGO_URI \
+            -e MONGO_USERNAME:$MONGO_USERNAME \
+            -e MONGO_PASSWORD:$MONGO_PASSWORD \
+            ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}
+
+            echo testing image url using wget
+            wget -q -O - localhost:3000/live 
         
 
 
