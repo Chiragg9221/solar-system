@@ -97,10 +97,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        
       - name: Building Docker Image
         uses: docker/build-push-action@v6
         with:   
-          context: Dockerfile     # this specifices the docker file needs to be used in order to create the image
+          context: .    # this is folder where the dockerfile is present (currently it is root folder)
           push: false
           tag: ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{ github.sha }}           #can be considered as image-name
 
