@@ -118,7 +118,25 @@ jobs:
             ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}
 
           echo testing image url using wget
-          wget -q -O - localhost:3000/live 
+          wget -q -O - localhost:3000/live    
+
+        #-q is for quiet mode 
+        #-O is fofr printing the output on terminal itself
+
+  Docker_push:
+    needs: [Docker_Build]
+    runs-on: Ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Docker Build Again & push 
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          tags: ${{vars.DOCKERHUB_USERNAME}}-solar-system-app:${{github.sha}}
+          push: true
+
         
 
 
