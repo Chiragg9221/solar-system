@@ -121,7 +121,7 @@ jobs:
           wget -q -O - localhost:3000/live    
 
         #-q is for quiet mode 
-        #-O is fofr printing the output on terminal itself
+        #-O is for printing the output on terminal itself
 
   Docker_push:
     needs: [Docker_Build]
@@ -144,7 +144,30 @@ jobs:
           tags: ${{vars.DOCKERHUB_USERNAME}}/solar-system-app:${{github.sha}}
           push: true
 
-        
+  Ghcr_image_build_push:
+    needs: [Docker_push]
+    runs-on: ubuntu-latest
+    permissions: 
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Docker login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io     # we are logging into github ghcr.io
+          username: ${{github.repository_owner}}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker Image Build
+        uses: docker/build-push-action@v6
+        with: 
+          context: .
+          push: true
+          tags: ghcr.io/${{github.repository_owner}}/solar-system:${{github.sha}}
+
+      
 
 
 
