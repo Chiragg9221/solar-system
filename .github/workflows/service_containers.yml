@@ -38,7 +38,10 @@ jobs:
                 npm test
                 ls -lrth
 
-            # - name: Upload Artifactory
-            #   uses: actions/upload-artifact@v4
+            - name: Upload Artifactory
+              uses: actions/upload-artifact@v4
+              with:
+                name: Node_Modules
+                path: node_modules
 
 
