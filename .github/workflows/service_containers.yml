@@ -36,4 +36,9 @@ jobs:
             - name: Unit Testing
               run: |
                 npm test
+                ls -lrth
+
+            # - name: Upload Artifactory
+            #   uses: actions/upload-artifact@v4
+
 
